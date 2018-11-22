@@ -36,9 +36,8 @@ public class ClassScanner {
      *
      * @param packageName
      * @return
-     * @throws Exception
      */
-    public static Map<Class<?>, Integer> getHandshakeInterceptor(String packageName) throws Exception {
+    public static Map<Class<?>, Integer> getHandshakeInterceptor(String packageName) {
 
         if (interceptorMap == null) {
             Set<Class<?>> clsList = getClasses(packageName);

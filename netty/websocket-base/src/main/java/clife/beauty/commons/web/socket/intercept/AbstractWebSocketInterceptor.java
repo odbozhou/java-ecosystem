@@ -18,7 +18,7 @@ public abstract class AbstractWebSocketInterceptor {
 
     private int order;
 
-    protected void intercept(ChannelHandlerContext ctx, Object msg) throws Exception {
+    protected void intercept(ChannelHandlerContext ctx, Object msg) {
         if (null == msg) {
             logger.warn("msg is null");
             return;
