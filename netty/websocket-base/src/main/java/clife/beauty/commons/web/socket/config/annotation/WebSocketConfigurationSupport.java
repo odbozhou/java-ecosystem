@@ -28,7 +28,7 @@ public class WebSocketConfigurationSupport {
     private NettyWebSocketHandlerRegistry handlerRegistry;
 
     public WebSocketConfigurationSupport() {
-        initHandlerRegistry();
+//        initHandlerRegistry();
     }
 
 //	@Bean
@@ -42,13 +42,13 @@ public class WebSocketConfigurationSupport {
 		return registry.getHandlerMapping();
 	}*/
 
-    private NettyWebSocketHandlerRegistry initHandlerRegistry() {
+/*    private NettyWebSocketHandlerRegistry initHandlerRegistry() {
         if (this.handlerRegistry == null) {
             this.handlerRegistry = new NettyWebSocketHandlerRegistry();
             registerWebSocketHandlers(this.handlerRegistry);
         }
         return this.handlerRegistry;
-    }
+    }*/
 
     protected void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
     }

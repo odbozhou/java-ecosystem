@@ -15,6 +15,7 @@
  */
 package clife.beauty.commons.web.socket.bootstrap;
 
+import clife.beauty.commons.web.socket.WebSocketHandler;
 import clife.beauty.commons.web.socket.config.WebSocketConfig;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -31,13 +32,16 @@ public class WebSocketServerInitializer extends ChannelInitializer<SocketChannel
 
     private WebSocketConfig webSocketConfig;
 
+    private WebSocketHandler webSocketHandler;
+
     public WebSocketServerInitializer(SslContext sslCtx) {
         this.sslCtx = sslCtx;
     }
 
-    public WebSocketServerInitializer(SslContext sslCtx, WebSocketConfig webSocketConfig) {
+    public WebSocketServerInitializer(SslContext sslCtx, WebSocketConfig webSocketConfig, WebSocketHandler webSocketHandler) {
         this.sslCtx = sslCtx;
         this.webSocketConfig = webSocketConfig;
+        this.webSocketHandler = webSocketHandler;
     }
 
     @Override
@@ -48,6 +52,6 @@ public class WebSocketServerInitializer extends ChannelInitializer<SocketChannel
         }
         pipeline.addLast(new HttpServerCodec());
         pipeline.addLast(new HttpObjectAggregator(65536));
-        pipeline.addLast(new WebSocketServerHandler(webSocketConfig));
+        pipeline.addLast(new WebSocketServerHandler(webSocketConfig, webSocketHandler));
     }
 }

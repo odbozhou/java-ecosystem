@@ -60,8 +60,9 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
 
     private WebSocketSession webSocketSession;
 
-    public WebSocketServerHandler(WebSocketConfig webSocketConfig) {
+    public WebSocketServerHandler(WebSocketConfig webSocketConfig, WebSocketHandler webSocketHandler) {
         this.webSocketConfig = webSocketConfig;
+        this.webSocketHandler = webSocketHandler;
     }
 
 

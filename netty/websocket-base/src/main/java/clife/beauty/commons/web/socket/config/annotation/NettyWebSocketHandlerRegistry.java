@@ -18,6 +18,8 @@ package clife.beauty.commons.web.socket.config.annotation;
 
 
 import clife.beauty.commons.web.socket.WebSocketHandler;
+import clife.beauty.commons.web.socket.bootstrap.WebSocketServer;
+import clife.beauty.commons.web.socket.config.WebSocketConfig;
 
 import java.util.*;
 
@@ -34,16 +36,25 @@ public class NettyWebSocketHandlerRegistry implements WebSocketHandlerRegistry {
 
     private int order = 1;
 
+    private WebSocketServer webSocketServer;
+
     /*@Nullable*/
 //    private UrlPathHelper urlPathHelper;
 
 
-    public NettyWebSocketHandlerRegistry() {
+    public NettyWebSocketHandlerRegistry(WebSocketServer webSocketServer) {
+        this.webSocketServer = webSocketServer;
     }
 
 
     @Override
-    public WebSocketHandlerRegistration addHandler(WebSocketHandler handler, String... paths) {
+    public WebSocketHandlerRegistration addHandler(WebSocketHandler handler, Integer port, String... paths) {
+
+        webSocketServer.setWebSocketHandler(handler);
+        WebSocketConfig webSocketConfig = webSocketServer.getWebSocketConfig();
+        webSocketConfig.setWebsocketPath(paths[0]);
+        webSocketConfig.setPort(port);
+
         NettyWebSocketHandlerRegistration registration = new NettyWebSocketHandlerRegistration();
         registration.addHandler(handler, paths);
         this.registrations.add(registration);

@@ -15,6 +15,7 @@
  */
 package clife.beauty.commons.web.socket.bootstrap;
 
+import clife.beauty.commons.web.socket.WebSocketHandler;
 import clife.beauty.commons.web.socket.config.WebSocketConfig;
 import clife.beauty.commons.web.socket.listener.ChannelStatusListener;
 import clife.beauty.commons.web.socket.listener.ChannelStatusManager;
@@ -42,6 +43,8 @@ public final class WebSocketServer {
 
     private WebSocketConfig webSocketConfig;
 
+    private WebSocketHandler webSocketHandler;
+
     static final ChannelStatusManager channelStatusManager = new ChannelStatusManager();
 
     public WebSocketConfig getWebSocketConfig() {
@@ -52,6 +55,14 @@ public final class WebSocketServer {
         this.webSocketConfig = webSocketConfig;
     }
 
+    public WebSocketHandler getWebSocketHandler() {
+        return webSocketHandler;
+    }
+
+    public void setWebSocketHandler(WebSocketHandler webSocketHandler) {
+        this.webSocketHandler = webSocketHandler;
+    }
+
     public void WEbSocketServer(WebSocketConfig webSocketConfig) {
         this.webSocketConfig = webSocketConfig;
     }
@@ -59,7 +70,7 @@ public final class WebSocketServer {
     static final boolean SSL = System.getProperty("ssl") != null;
     static final int PORT = Integer.parseInt(System.getProperty("port", SSL ? "8443" : "8080"));
 
-    private void asyncInit() {
+    public void asyncInit() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -88,7 +99,7 @@ public final class WebSocketServer {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .childHandler(new WebSocketServerInitializer(sslCtx, webSocketConfig));
+                    .childHandler(new WebSocketServerInitializer(sslCtx, webSocketConfig, webSocketHandler));
 
             Channel ch = b.bind(webSocketConfig.getPort()).sync().channel();
 

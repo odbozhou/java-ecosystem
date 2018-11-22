@@ -15,12 +15,23 @@
         <context:exclude-filter type="annotation"
                                 expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
-    <bean id="webSocketConfig" name="webSocketConfig" class="clife.beauty.commons.web.socket.config.WebSocketConfig">
-        <property name="packagename" value="com.zhou.interceptor"/>
-        <property name="port" value="9090"/>
-        <property name="websocketPath" value="/handshake"/>
-    </bean>
-    <bean class="clife.beauty.commons.web.socket.bootstrap.WebSocketServer" init-method="asyncInit">
-        <property name="webSocketConfig" ref="webSocketConfig"/>
+    <!--    <bean id="webSocketConfig" name="webSocketConfig" class="clife.beauty.commons.web.socket.config.WebSocketConfig">
+            <property name="packagename" value="com.zhou.interceptor"/>
+            <property name="port" value="9090"/>
+            <property name="websocketPath" value="/handshake"/>
+        </bean>
+        <bean class="clife.beauty.commons.web.socket.bootstrap.WebSocketServer" init-method="asyncInit">
+            <property name="webSocketConfig" ref="webSocketConfig"/>
+        </bean>-->
+
+    <bean id="nettyWebSocketConfigurer" name="nettyWebSocketConfigurer"
+          class="com.zhou.config.NettyWebSocketConfigurer"></bean>
+
+    <bean class="clife.beauty.commons.web.socket.config.annotation.DelegatingWebSocketConfiguration">
+        <property name="configurers">
+            <list>
+                <ref bean="nettyWebSocketConfigurer"/>
+            </list>
+        </property>
     </bean>
 </beans>
