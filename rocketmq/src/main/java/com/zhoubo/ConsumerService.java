@@ -33,11 +33,13 @@ public class ConsumerService {
     public void receiveOrderedMessage() throws MQClientException {
         DefaultMQPushConsumer defaultMQPushConsumer = new DefaultMQPushConsumer("orderedConsumerGroup");
         defaultMQPushConsumer.setNamesrvAddr("127.0.0.1:9876");
-        defaultMQPushConsumer.subscribe("testTopic", "taga || tagb || tagc");
+        String[] tags = {"createOrder", "pay", "deliver"};
+        defaultMQPushConsumer.subscribe("testTopic", "*");
         defaultMQPushConsumer.registerMessageListener(new MessageListenerOrderly() {
             public ConsumeOrderlyStatus consumeMessage(List<MessageExt> msgs, ConsumeOrderlyContext context) {
-                context.setAutoCommit(false);
-                return null;
+//                context.setAutoCommit(false);
+                System.out.println(msgs);
+                return ConsumeOrderlyStatus.SUCCESS;
             }
         });
     }

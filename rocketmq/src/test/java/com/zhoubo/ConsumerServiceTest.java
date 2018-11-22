@@ -22,4 +22,13 @@ public class ConsumerServiceTest {
             this.wait();
         }
     }
+
+    @Test
+    public void receiveOrderedMessage() throws InterruptedException, MQClientException {
+        ConsumerService consumerService = new ConsumerService();
+        consumerService.receiveOrderedMessage();
+        synchronized (this) {
+            this.wait();
+        }
+    }
 }

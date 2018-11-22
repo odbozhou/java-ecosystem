@@ -1,0 +1,40 @@
+package clife.beauty.commons.web.socket.config.annotation;
+
+
+import clife.beauty.commons.web.socket.utils.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * A variation of {@link WebSocketConfigurationSupport} that detects implementations of
+ * {@link WebSocketConfigurer} in Spring configuration and invokes them in order to
+ * configure WebSocket request handling.
+ *
+ * @author Rossen Stoyanchev
+ * @since 4.0
+ */
+//@Configuration
+public class DelegatingWebSocketConfiguration extends WebSocketConfigurationSupport {
+
+    private final List<WebSocketConfigurer> configurers = new ArrayList<>();
+
+
+    //	@Autowired(required = false)
+    public void setConfigurers(List<WebSocketConfigurer> configurers) {
+        if (!CollectionUtils.isEmpty(configurers)) {
+            this.configurers.addAll(configurers);
+        }
+    }
+
+
+    @Override
+    protected void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+/*		for (WebSocketConfigurer configurer : this.configurers) {
+			configurer.registerWebSocketHandlers(registry);
+		}*/
+        System.out.println("1");
+        System.out.println("2");
+    }
+
+}
