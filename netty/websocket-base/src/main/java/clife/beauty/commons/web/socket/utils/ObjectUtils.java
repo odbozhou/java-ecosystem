@@ -410,7 +410,7 @@ public abstract class ObjectUtils {
                 return nullSafeHashCode((Object[]) obj);
             }
             if (obj instanceof boolean[]) {
-                return nullSafeHashCode((boolean[]) obj);
+                return nullSafeHashCode(obj);
             }
             if (obj instanceof byte[]) {
                 return nullSafeHashCode((byte[]) obj);
@@ -419,16 +419,16 @@ public abstract class ObjectUtils {
                 return nullSafeHashCode((char[]) obj);
             }
             if (obj instanceof double[]) {
-                return nullSafeHashCode((double[]) obj);
+                return nullSafeHashCode(obj);
             }
             if (obj instanceof float[]) {
-                return nullSafeHashCode((float[]) obj);
+                return nullSafeHashCode(obj);
             }
             if (obj instanceof int[]) {
                 return nullSafeHashCode((int[]) obj);
             }
             if (obj instanceof long[]) {
-                return nullSafeHashCode((long[]) obj);
+                return nullSafeHashCode(obj);
             }
             if (obj instanceof short[]) {
                 return nullSafeHashCode((short[]) obj);

@@ -68,9 +68,8 @@ public class ClassScanner {
      *
      * @param packageName
      * @return
-     * @throws Exception
      */
-    public static Set<Class<?>> getClasses(String packageName) throws Exception {
+    public static Set<Class<?>> getClasses(String packageName) {
 
         if (classes == null) {
             classes = new HashSet<>(32);

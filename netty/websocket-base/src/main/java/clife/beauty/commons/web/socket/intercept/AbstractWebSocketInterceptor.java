@@ -32,11 +32,11 @@ public abstract class AbstractWebSocketInterceptor {
         }
     }
 
-    protected void doIntercept(ChannelHandlerContext ctx, FullHttpRequest req) throws Exception {
+    protected void doIntercept(ChannelHandlerContext ctx, FullHttpRequest req) {
         logger.info("FullHttpRequest doIntercept");
     }
 
-    protected void doIntercept(ChannelHandlerContext ctx, WebSocketFrame frame) throws Exception {
+    protected void doIntercept(ChannelHandlerContext ctx, WebSocketFrame frame) {
         logger.info("WebSocketFrame doIntercept");
     }
 

@@ -28,17 +28,17 @@ public abstract class AbstractWebSocketHandler implements WebSocketHandler {
         }
     }
 
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) {
     }
 
     protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message) throws Exception {
     }
 
-    protected void handlePongMessage(WebSocketSession session, PongMessage message) throws Exception {
+    protected void handlePongMessage(WebSocketSession session, PongMessage message) {
     }
 
     @Override
-    public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
+    public void handleTransportError(WebSocketSession session, Throwable exception) {
     }
 
     @Override

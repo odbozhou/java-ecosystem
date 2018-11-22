@@ -217,8 +217,8 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
             return;
         }
         if (frame instanceof PingWebSocketFrame) {
-            logger.info("Receive message: {}", ((PingWebSocketFrame) frame).content().toString());
-            WebSocketMessage webSocketMessage = new PingMessage((((PingWebSocketFrame) frame).content()).nioBuffer());
+            logger.info("Receive message: {}", frame.content().toString());
+            WebSocketMessage webSocketMessage = new PingMessage((frame.content()).nioBuffer());
             try {
                 webSocketHandler.handleMessage(webSocketSession, webSocketMessage);
             } catch (Exception e) {
@@ -241,7 +241,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
         }
         if (frame instanceof BinaryWebSocketFrame) {
             // Echo the frame
-            WebSocketMessage webSocketMessage = new BinaryMessage(((BinaryWebSocketFrame) frame).content().nioBuffer());
+            WebSocketMessage webSocketMessage = new BinaryMessage(frame.content().nioBuffer());
             try {
                 webSocketHandler.handleMessage(webSocketSession, webSocketMessage);
             } catch (Exception e) {
